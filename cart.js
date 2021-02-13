@@ -1,9 +1,7 @@
 const cart = JSON.parse(localStorage.getItem('cart')) || []
-
 let keys = Object.keys(cart);
 
 let counterCart = document.querySelector('#counterCart');
-
 counterCart.innerHTML += `${keys.length}`;
 
 const cartDetails = document.querySelector('#cartDetails');
@@ -13,13 +11,9 @@ let totalPrice = 0;
 for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
 
-    serverPrice = cart[key].price / 100;
-
-    productPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(serverPrice);
-
-    quantityPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(serverPrice * cart[key].quantity);
-
-    totalPrice += cart[key].quantity * serverPrice;
+    productPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart[key].price / 100);
+    quantityPrice = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart[key].price / 100 * cart[key].quantity);
+    totalPrice += cart[key].quantity * cart[key].price / 100;
 
     cartDetails.innerHTML += 
     `
@@ -47,7 +41,6 @@ cartDetails.innerHTML +=
 `
 
 const buttonDanger = document.querySelector('.btn-danger');
-
 buttonDanger.addEventListener('click', function() {
     localStorage.clear();
     location.reload();
@@ -55,7 +48,6 @@ buttonDanger.addEventListener('click', function() {
 );
 
 const form = document.querySelector('form');
-
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const total = totalFormattedPrice;

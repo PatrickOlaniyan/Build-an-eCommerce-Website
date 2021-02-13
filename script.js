@@ -1,13 +1,10 @@
 var cameras = getAllCameras();
 
 cameras.then(function(response) {
-    
     const cameraCard = document.querySelector('#cameraCard');
 
     for (let camera of response) {
-        
         cameraCard.innerHTML += 
-        
         `
         <a href="product.html?id=${camera._id}"> 
         <div class="card m-3">
